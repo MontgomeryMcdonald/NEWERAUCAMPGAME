@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         // moves the player :D. gets input axis with magical means
         float x = Input.GetAxis("Horizontal");
-        float z = -Input.GetAxis("Vertical");
+        float z = Input.GetAxis("Vertical");
         Vector3 moveDir = playerObj.transform.forward * z + playerObj.transform.right * x;
         rig.AddForce(moveDir.normalized * movespeed * 10f, ForceMode.Force);
         Vector3 flatVel = new Vector3(rig.velocity.x, 0f, rig.velocity.z);
@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
             TryJump();
         }
 
-        if(health <= 0)
+        if(Health <= 0)
         {
             anim.SetBool("isAlive", true);
             StartCoroutine("DieToDeath");
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator DieToDeath()
-    {
+    {   
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(0);
     }
